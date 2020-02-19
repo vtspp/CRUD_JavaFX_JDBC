@@ -15,6 +15,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import model.entities.Department;
+import model.service.DepartmentService;
 
 public class MainViewController implements Initializable{
 	@FXML
@@ -57,6 +59,10 @@ public class MainViewController implements Initializable{
 			mainVBox.getChildren().clear();
 			mainVBox.getChildren().add(mainMenu);
 			mainVBox.getChildren().addAll(vbox.getChildren());
+			
+			DepartmentListController controller = load.getController();
+			controller.setDepartmentService(new DepartmentService());
+			controller.updateTableView();
 		}
 		catch(IOException e) {
 			Alerts.showAlert("IOEXCEPTION", "Error loading iew.", e.getMessage(), AlertType.ERROR );
