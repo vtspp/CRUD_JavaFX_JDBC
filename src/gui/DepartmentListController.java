@@ -38,24 +38,6 @@ public class DepartmentListController implements Initializable{
 	private TableColumn<Department, String> tableColumnName;
 	@FXML
 	private Button button;
-	@FXML
-	private Label id;
-	@FXML
-	private Label name;
-	@FXML
-	private GridPane gridPane;
-	@FXML
-	private TextField textFieldId;
-	@FXML
-	private TextField textFieldName;
-	@FXML
-	private Label error;
-	@FXML
-	private HBox hbox;
-	@FXML
-	private Button save;
-	@FXML
-	private Button cancel;
 	
 	private DepartmentService service;
 	
