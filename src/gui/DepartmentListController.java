@@ -55,6 +55,7 @@ public class DepartmentListController implements Initializable{
 			
 			DepartmentFormController controller = load.getController();
 			controller.setDepartment(obj);
+			controller.setDepartmentService(new DepartmentService());
 			controller.updateFormData();
 			
 			Pane pane = load.load();
