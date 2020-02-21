@@ -45,12 +45,17 @@ public class DepartmentListController implements Initializable{
 	
 	public void onbuttonAction(ActionEvent event) {
 		Stage parentStage = Utils.currentStage(event);
-		createDialogForm(parentStage, "/gui/DepartmentForm.fxml");
+		Department obj = new Department();
+		createDialogForm(obj, parentStage, "/gui/DepartmentForm.fxml");
 	}
 	
-	public void createDialogForm(Stage parentStage, String guiFxml) {
+	public void createDialogForm(Department obj, Stage parentStage, String guiFxml) {
 		try {
 			FXMLLoader load = new FXMLLoader(getClass().getResource(guiFxml));
+			
+			DepartmentFormController controller = load.getController();
+			controller.setDepartment(obj);
+			controller.updateFormData();
 			
 			Pane pane = load.load();
 			
