@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Utils;
 import javafx.collections.FXCollections;
@@ -29,7 +30,7 @@ import javafx.stage.Stage;
 import model.entities.Department;
 import model.service.DepartmentService;
 
-public class DepartmentListController implements Initializable{
+public class DepartmentListController implements Initializable, DataChangeListener{
 	@FXML
 	private TableView<Department> tableViewDepartment;
 	@FXML
@@ -46,19 +47,20 @@ public class DepartmentListController implements Initializable{
 	public void onbuttonAction(ActionEvent event) {
 		Stage parentStage = Utils.currentStage(event);
 		Department obj = new Department();
-		createDialogForm(obj, parentStage, "/gui/DepartmentForm.fxml");
+		createDialogForm(obj, "/gui/DepartmentForm.fxml", parentStage );
 	}
 	
-	public void createDialogForm(Department obj, Stage parentStage, String guiFxml) {
+	public void createDialogForm(Department obj, String guiFxml, Stage parentStage) {
 		try {
 			FXMLLoader load = new FXMLLoader(getClass().getResource(guiFxml));
+			
+			Pane pane = load.load();
 			
 			DepartmentFormController controller = load.getController();
 			controller.setDepartment(obj);
 			controller.setDepartmentService(new DepartmentService());
+			controller.subscribeDataChangeListener(this);
 			controller.updateFormData();
-			
-			Pane pane = load.load();
 			
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("Enter department data");
@@ -99,6 +101,11 @@ public class DepartmentListController implements Initializable{
 		
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewDepartment.prefHeightProperty().bind(stage.heightProperty());
+	}
+
+	@Override
+	public void onDateChanged() {
+		updateTableView();
 	}
 
 }
