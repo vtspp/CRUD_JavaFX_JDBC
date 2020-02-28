@@ -28,6 +28,7 @@
         <columns>
           <TableColumn fx:id="tableColumnID" onEditStart="#onbuttonAction" prefWidth="47.0" text="Id" />
           <TableColumn fx:id="tableColumnName" onEditStart="#onbuttonAction" prefWidth="117.0" text="Name" />
+            <TableColumn fx:id="tableColumnEDIT" prefWidth="75.0" />
         </columns>
       </TableView>
    </children>
